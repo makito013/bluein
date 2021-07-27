@@ -8,5 +8,5 @@ Sistema de votação para empreendimentos com login e visualização de totla de
 - Yarn
 
 ## Projetos
-### [Front-End](/Front-End)
-### [Back-End](/Back-End)
+### [Front-End](https://github.com/makito013/bluein/tree/master/Front_End)
+### [Back-End](https://github.com/makito013/bluein/tree/master/Back-End)
