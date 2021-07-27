@@ -1,12 +1,38 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter , Route, Switch, Redirect } from 'react-router-dom';
+import LoginTemplate from './template/login'
+import Login from './login'
+import Cadastro from './cadastro'
 
+class Index extends Component{
+    constructor(props) {
+        super(props);
+    }
+
+    login(){
+
+    }
+
+
+    render(){
+        return(
+            <BrowserRouter basename="">
+                <Switch>
+                    <Route path="/login" render={props => <LoginTemplate page={<Login/>}/>} />
+                    <Route path="/cadastro" render={props => <LoginTemplate page={<Cadastro/>}/>} />
+                    <Redirect from="/" to="/login" />
+                </Switch>
+            </BrowserRouter>
+        )
+    }
+}
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Index />
   </React.StrictMode>,
   document.getElementById('root')
 );
