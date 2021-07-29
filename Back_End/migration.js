@@ -54,6 +54,7 @@ const versao1 = (db) => {
           // Tabela já existe
         } else {
           // Tabela criado, inserindo valores padrões
+          db.run(`UPDATE version SET number = ?`, 1)
           var insert = 'INSERT INTO user (name, email, password) VALUES (?,?,?)'
           db.run(insert, ["admin", "admin@example.com", md5("admin123456")])
           db.run(insert, ["user", "user@example.com", md5("user123456")])
@@ -77,6 +78,7 @@ const versao2 = (db) => {
         } else {
           // Tabela criado, inserindo valores padrões
           var insert = 'INSERT INTO user (name, email, password) VALUES (?,?,?)'
+          db.run(`UPDATE version SET number = ?`, 2)
           db.run(insert, "Le Jardim");
           db.run(insert, "Evian");
           db.run(insert, "Olímpia Thermas");
@@ -90,21 +92,14 @@ const versao2 = (db) => {
 // Criação da tabela de votos
 const versao3 = (db) => {
   return new Promise(async (resolve, reject) => {
-    db.run(`CREATE TABLE enterprises (
+    db.run(`CREATE TABLE vote (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
-              name text            
-              )`,
-      (err) => {
-        if (err) {
-          // Tabela já existe
-        } else {
-          // Tabela criado, inserindo valores padrões
-          var insert = 'INSERT INTO user (name, email, password) VALUES (?,?,?)'
-          db.run(insert, "Le Jardim");
-          db.run(insert, "Evian");
-          db.run(insert, "Olímpia Thermas");
-        }
-      });
+              enterprise_Id INTEGER,
+              user_Id            
+              )`,(err) => {
+      db.run(`UPDATE version SET number = ?`, 3)
+    });
+
     resolve(true);
   })
 }
@@ -118,7 +113,9 @@ const versao4 = (db) => {
               user_Id INTEGER, 
               date text,
               token text           
-              )`);
+              )`,(err) => {
+      db.run(`UPDATE version SET number = ?`, 4)
+    });
     resolve(true);
   })
 }
